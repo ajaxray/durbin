@@ -1,19 +1,26 @@
-# Durbin - Docker Container Monitor
+# Durbin - Docker Container Manager
 
-Tiny PHP script for monitoring Docker Containers running on a remote server.
+Tiny PHP script for monitoring Docker Containers running on a VPS/remote server.
 
-<img src="https://github.com/ajaxray/durbin/assets/439612/cee00f45-0fce-4c7c-a1f0-5b394bbdaa10" width="800" alt="Durbin Screenshot" />
+<img src="https://github.com/ajaxray/durbin/assets/439612/8725dc33-c19c-4030-a25b-58ee0247f788" width="800" alt="Durbin Screenshot" />
+
 
 ## Installation Steps
 
 1. `git clone git@github.com:ajaxray/durbin.git`, 
 2. `composer install --prefer-dist`
 3. Check the `inc/config.php` to adjust your deployment environment.
-4. Durbin is built using [Framework-X](https://framework-x.org/). See [Production deployment](https://framework-x.org/docs/best-practices/deployment/) options from their docs. 
+4. Now you can run it like any php app, including PHP development server.
+```shell
+# Assuming you are in Durbin base directory
+cd public
+php -S localhost:8081
+```
+Durbin is built using [Framework-X](https://framework-x.org/). See [Production deployment](https://framework-x.org/docs/best-practices/deployment/) options from their docs. 
 
-### Installing in subdirectory
+### Running in a subdirectory
 If your domain is _example.com_ and you want to keep this tool at _example.com/durbin_,
-just keep this **durbin** directory in your _example.com_'s root directory.  
+just keep this **durbin** directory in your _example.com_'s web root directory.  
 Also, in the `inc/config.php` file, set `base_url` to 'http://example.com/durbin/'.
 
 ## Security
@@ -33,8 +40,8 @@ Disabling auth is _NOT RECOMMENDED!_ unless you are using some other kind of sec
 - [x] Ability to install in subdirectory
 - [ ] Show latest logs of a container
 - [ ] Show streaming logs of a container
-- [ ] Start a stopped container
-- [ ] Restart a running container
+- [x] Start a stopped container
+- [x] Stop a running container
 
 ## Notes/Cautions
 - Docker should be in running state in your server.

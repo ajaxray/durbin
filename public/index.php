@@ -1,5 +1,8 @@
 <?php
 
+use Durbin\Processor\AttachStartActions;
+use Durbin\Processor\AttachStatusIndicator;
+
 require __DIR__ . '/../vendor/autoload.php';
 
 $config = include(__DIR__. '/../inc/config.php');
@@ -8,12 +11,13 @@ $app = new FrameworkX\App();
 
 // @TODO : Is docker running on middleware
 // @TODO : Basic Auth on middleware
+// @TODO : Add CSRF middleware
 
 $app->get('/', function () {
 
     $output = shell_exec('docker ps');
     $rows = getColumnsAsArray($output);
-    $rows = (new \Durbin\Processor\AttachStatusIndicator())->process($rows);
+    $rows = (new AttachStatusIndicator())->process($rows);
 
     return React\Http\Message\Response::html(
         render('layout', [
@@ -28,7 +32,8 @@ $app->get('/all', function () {
 
     $output = shell_exec('docker ps -a');
     $rows = getColumnsAsArray($output);
-    $rows = (new \Durbin\Processor\AttachStatusIndicator())->process($rows);
+    $rows = (new AttachStatusIndicator())->process($rows);
+    $rows = (new AttachStartActions())->process($rows);
 
     return React\Http\Message\Response::html(
         render('layout', [
@@ -43,7 +48,7 @@ $app->get('/stats', function () {
 
     $output = shell_exec('docker stats --no-stream');
     $rows = getColumnsAsArray($output);
-    $rows = (new \Durbin\Processor\AttachStatusIndicator())->process($rows);
+    $rows = (new AttachStatusIndicator())->process($rows);
 
     return React\Http\Message\Response::html(
         render('layout', [
@@ -55,9 +60,20 @@ $app->get('/stats', function () {
 });
 
 
-$app->get('/users/{name}', function (Psr\Http\Message\ServerRequestInterface $request) {
-    return React\Http\Message\Response::plaintext(
-        "Hello " . $request->getAttribute('name') . "!\n"
+$app->post('/action', function (Psr\Http\Message\ServerRequestInterface $request) {
+    $data = $request->getParsedBody();
+    $command = match ($data['action']) {
+        'start' => "docker start {$data['container_id']}",
+        'stop' => "docker stop {$data['container_id']}",
+    };
+    $output = shell_exec($command);
+
+    return React\Http\Message\Response::html(
+        render('layout', [
+            'page' => 'n/a',
+            'title' => "Command executed to {$data['action']} {$data['container_id']}",
+            'content' => "<div class=\"cmd-output\">&gt; {$command}\n{$output}</div>"
+        ])
     );
 });
 

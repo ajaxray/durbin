@@ -25,7 +25,7 @@
     <a href="<?= $base_url ?>/stats" <?= $page == 'stats' ? 'class="active"' : '' ?> >Stats</a>
     <a href="<?= $base_url ?>/all" <?= $page == 'all' ? 'class="active"' : '' ?> >All</a>
     <a href="<?= $base_url ?>" <?= $page == 'running' ? 'class="active"' : '' ?> >Running</a>
-    <a href="javascript:void(0);" id="menu-toggle" onclick="togglemenu()">
+    <a href="javascript:void(0);" id="menu-toggle">
         <div class="menu-toggle__bar1"></div>
         <div class="menu-toggle__bar2"></div>
         <div class="menu-toggle__bar3"></div>
@@ -35,7 +35,17 @@
 <main>
     <h2><?= $title ?></h2>
     <div class="container">
-        <div class="content"><?= $content ?></div>
+
+        <form action="<?= $base_url ?>/action" method="post" id="action-form">
+            <input type="hidden" name="_csrf" value="<?= $csrfToken ?? 'no-csrf-token' ?>">
+            <input type="hidden" name="container_id" value="">
+            <input type="hidden" name="action" value="">
+
+            <div class="content">
+                <?= $content ?>
+            </div>
+        </form>
+
     </div>
 </main>
 
@@ -44,16 +54,38 @@
     <small><?= $copyright ?></small>
 </footer>
 <script>
-    function togglemenu() {
-        var x = document.getElementById("nav");
-        if (x.className === "nav") {
-            x.className += " nav--open";
-        } else {
-            x.className = "nav";
-        }
-        var element = document.getElementById("menu-toggle");
-        element.classList.toggle("menu-toggle--open");
-    }
+
+    document.addEventListener("DOMContentLoaded", (event) => {
+
+        let form = document.getElementById("action-form");
+        let nav = document.getElementById("nav");
+        let actionButtons = document.querySelectorAll(".btn-action");
+
+        actionButtons.forEach(function(button) {
+            button.addEventListener("click", function(event) {
+                event.preventDefault();
+                this.innerText = "wait...";
+                this.style.color = 'lightgrey';
+
+                document.getElementsByName('container_id')[0].setAttribute('value', this.dataset.containerId);
+                document.getElementsByName('action')[0].setAttribute('value', this.dataset.action);
+                form.submit();
+            });
+        });
+
+        document.getElementById("menu-toggle").addEventListener("click", function(event) {
+            event.preventDefault();
+
+            if (nav.className === "nav") {
+                nav.className += " nav--open";
+            } else {
+                nav.className = "nav";
+            }
+
+            this.classList.toggle("menu-toggle--open");
+        });
+    });
+
 </script>
 </body>
 </html>

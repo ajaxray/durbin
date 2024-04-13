@@ -14,7 +14,7 @@ Tiny PHP script for monitoring Docker Containers running on a remote server.
 ### Installing in subdirectory
 If your domain is _example.com_ and you want to keep this tool at _example.com/durbin_,
 just keep this **durbin** directory in your _example.com_'s root directory.  
-Also, in the `inc/config.php` file, set `basePath` to '/durbin/'.
+Also, in the `inc/config.php` file, set `base_url` to 'http://example.com/durbin/'.
 
 ## Security
 

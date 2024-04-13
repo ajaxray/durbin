@@ -1,4 +1,5 @@
 <?php
+(__FILE__ == $_SERVER["SCRIPT_FILENAME"]) && die('Trying to hack something? 🥱');
 
 function render(string $view, array $vars = []): string
 {
@@ -11,7 +12,7 @@ function render(string $view, array $vars = []): string
     }
 
     ob_start();
-    $data = array_merge($vars, $config);
+    $data = array_merge($config, $vars);
     extract($data, EXTR_SKIP);
     require $path;
 

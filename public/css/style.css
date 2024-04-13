@@ -29,6 +29,30 @@ main, nav, footer {
     overflow-y: auto;
     padding: 10px;
 }
+.container form {
+    display: flex;
+}
+.container .content {
+    display: table;
+}
+
+.btn-action {
+    color: lime;
+    background-color: darkcyan;
+    border-width: 0;
+    box-shadow: 1px 1px 0 darkseagreen;
+    padding: 2px 4px;
+    margin: 2px;
+}
+
+.btn-action:hover {
+    color: yellow;
+    box-shadow: 2px 2px 0 yellowgreen;
+    cursor: pointer;
+}
+.cmd-output {
+    text-align: left;
+}
 
 /* =========== Navigation bar start */
 .nav {

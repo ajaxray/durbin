@@ -39,3 +39,8 @@ Disabling auth is _NOT RECOMMENDED!_ unless you are using some other kind of sec
 ## Notes/Cautions
 - Docker should be in running state in your server.
 - This app itself should not be running inside Docker container.
+
+## Credits
+
+- The background illustration was taken from [here](https://www.behance.net/gallery/41119883/Docker-Whale/modules/248250921).
+- The logo was a [free icon](https://www.iconfinder.com/icons/7204507/binoculars_find_search_zoom_magnifier_army_military_icon) on iconfinder.com.

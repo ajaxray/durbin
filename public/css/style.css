@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+html {
+    background: url('../img/background.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 body {
     font-family: "JetBrains Mono", monospace;
     font-optical-sizing: auto;
@@ -8,7 +16,7 @@ body {
     font-style: normal;
     display:flex; flex-direction:column; justify-content:center;
     min-height:100vh;
-    background-color: lightblue;
+    /*background-color: lightblue;*/
  }
 
 main, nav, footer {
@@ -20,7 +28,8 @@ main, nav, footer {
     display: flex;
     vertical-align: top;
     white-space: pre;
-    background-color: #1f1f1f;
+    /*background-color: #1f1f1f;*/
+    background: rgba(10, 20, 10, .85);
     color: lightgreen;
     line-height: 1.4em;
     border-radius: 4px;

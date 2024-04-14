@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     let form = document.getElementById("action-form");
     let nav = document.getElementById("nav");
-    let actionButtons = document.querySelectorAll(".btn-action");
+    let actionButtons = document.querySelectorAll("button.btn-action");
 
     actionButtons.forEach(function(button) {
         button.addEventListener("click", function(event) {

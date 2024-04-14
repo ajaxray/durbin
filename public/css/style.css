@@ -51,7 +51,9 @@ main, nav, footer {
     border-width: 0;
     box-shadow: 1px 1px 0 darkseagreen;
     padding: 2px 4px;
-    margin: 2px;
+    margin: 2px 1px;
+    line-height: 18px;
+    text-decoration: none;
 }
 
 .btn-action:hover {

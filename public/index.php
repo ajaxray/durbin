@@ -1,7 +1,7 @@
 <?php
 
 use Durbin\Middleware\{BasicAuthMiddleware, CheckDockerMiddleware};
-use Durbin\Processor\{AttachStartActions, AttachStatusIndicator};
+use Durbin\Processor\{AttachActions, AttachStatusIndicator};
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -21,7 +21,7 @@ $app->get('/', function () {
     $output = shell_exec('docker ps');
     $rows = getColumnsAsArray($output);
     $rows = (new AttachStatusIndicator())->process($rows);
-    $rows = (new AttachStartActions())->process($rows);
+    $rows = (new AttachActions())->process($rows);
 
     return React\Http\Message\Response::html(
         render('layout', [
@@ -37,7 +37,7 @@ $app->get('/all',  function () {
     $output = shell_exec('docker ps -a');
     $rows = getColumnsAsArray($output);
     $rows = (new AttachStatusIndicator())->process($rows);
-    $rows = (new AttachStartActions())->process($rows);
+    $rows = (new AttachActions())->process($rows);
 
     return React\Http\Message\Response::html(
         render('layout', [
@@ -81,7 +81,7 @@ $app->post('/action', function (Psr\Http\Message\ServerRequestInterface $request
     );
 });
 
-$app->get('/logs', function () {
+$app->get('/logs/watch/{container-id}', function () {
 
     $handle = popen('docker logs -f a11f2ba48daa 2>&1', 'r');
 
@@ -99,6 +99,20 @@ $app->get('/logs', function () {
             'Cache-Control'  => 'no-store',
         ],
         $dest
+    );
+});
+
+$app->get('/logs/{container-id}', function (Psr\Http\Message\ServerRequestInterface $request) {
+
+    $containerId = $request->getAttribute('container-id', 'no-container-id');
+    $output = shell_exec('docker logs -n30 '. $containerId);
+
+    return React\Http\Message\Response::html(
+        render('layout', [
+            'page' => 'n/a',
+            'title' => 'Latest logs from '. $containerId,
+            'content' => htmlentities(trim($output)),
+        ])
     );
 });
 

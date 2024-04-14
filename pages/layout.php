@@ -41,9 +41,8 @@
             <input type="hidden" name="container_id" value="">
             <input type="hidden" name="action" value="">
 
-            <div class="content">
-                <?= $content ?>
-            </div>
+            <div class="content"><?= $content ?></div>
+
         </form>
 
     </div>

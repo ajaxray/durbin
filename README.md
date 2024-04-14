@@ -29,7 +29,7 @@ Also, in the `inc/config.php` file, set `base_url` to 'http://example.com/durbin
 Secured with Basic Auth by default.
 Check the `auth` values in `inc/config.php` to get/change the username and password.
 
-If you want to disable it, just comment out `basicAuth()` function call in `index.php`.
+If you want to disable it, just remove `BasicAuthMiddleware` from `FrameworkX\App` instantiation in `index.php`.
 Disabling auth is _NOT RECOMMENDED!_ unless you are using some other kind of security.
 
 ## Roadmap

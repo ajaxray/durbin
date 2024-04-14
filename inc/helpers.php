@@ -1,5 +1,5 @@
 <?php
-(__FILE__ == $_SERVER["SCRIPT_FILENAME"]) && die('Trying to hack something? 🥱');
+(__FILE__ == $_SERVER["SCRIPT_FILENAME"]) && http_response_code(403) && exit;
 
 function render(string $view, array $vars = []): string
 {

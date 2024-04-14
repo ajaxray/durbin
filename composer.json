@@ -1,13 +1,13 @@
 {
     "name": "ajaxray/durbin",
-    "description": "Framework X – the simple and fast micro framework for building reactive web applications that run anywhere.",
-    "keywords": ["microframework", "micro", "framework", "web", "http", "event-driven", "async", "ReactPHP"],
-    "homepage": "https://framework-x.org/",
+    "description": "Durbin - Monitoring Docker Containers running on a VPS/remote server.",
+    "keywords": ["docker", "monitoring", "php", "web", "APM", "observer", "containers"],
+    "homepage": "https://github.com/ajaxray/durbin",
     "license": "MIT",
     "authors": [
         {
-            "name": "Christian Lück",
-            "email": "christian@clue.engineering"
+            "name": "Anis Uddin Ahmad",
+            "email": "anis.programmer@gmail.com"
         }
     ],
     "require": {

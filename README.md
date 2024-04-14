@@ -19,6 +19,7 @@ php -S localhost:8081
 Durbin is built using [Framework-X](https://framework-x.org/). See [Production deployment](https://framework-x.org/docs/best-practices/deployment/) options from their docs. 
 
 ### Running in a subdirectory
+
 If your domain is _example.com_ and you want to keep this tool at _example.com/durbin_,
 just keep this **durbin** directory in your _example.com_'s web root directory.  
 Also, in the `inc/config.php` file, set `base_url` to 'http://example.com/durbin/'.
@@ -44,10 +45,12 @@ Disabling auth is _NOT RECOMMENDED!_ unless you are using some other kind of sec
 - [x] Stop a running container
 
 ## Notes/Cautions
+- 
 - Docker should be in running state in your server.
 - This app itself should not be running inside Docker container.
 
 ## Credits
 
+- Built using [Framework-X](https://framework-x.org/), a modern PHP microframework on top of [ReactPHP](https://reactphp.org/).
 - The background illustration was taken from [here](https://www.behance.net/gallery/41119883/Docker-Whale/modules/248250921).
 - The logo was a [free icon](https://www.iconfinder.com/icons/7204507/binoculars_find_search_zoom_magnifier_army_military_icon) on iconfinder.com.

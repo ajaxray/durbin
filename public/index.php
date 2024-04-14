@@ -1,15 +1,16 @@
 <?php
 
-use Durbin\Middleware\BasicAuthMiddleware;
-use Durbin\Processor\AttachStartActions;
-use Durbin\Processor\AttachStatusIndicator;
+use Durbin\Middleware\{BasicAuthMiddleware, CheckDockerMiddleware};
+use Durbin\Processor\{AttachStartActions, AttachStatusIndicator};
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $config = include(__DIR__. '/../inc/config.php');
 
 $app = new FrameworkX\App(
-        BasicAuthMiddleware::class
+        FrameworkX\ErrorHandler::class,
+        BasicAuthMiddleware::class,
+        CheckDockerMiddleware::class,
     );
 
 // @TODO : Is docker running on middleware
@@ -98,6 +99,22 @@ $app->get('/logs', function () {
             'Cache-Control'  => 'no-store',
         ],
         $dest
+    );
+});
+
+$app->get('/error/{error-type}', function (Psr\Http\Message\ServerRequestInterface $request) {
+
+    $message = match ($request->getAttribute('error-type')) {
+        'no-docker' => 'Seems like Docker is not running... 🧐',
+        default => 'Something went wrong!',
+    };
+
+    return React\Http\Message\Response::html(
+        render('layout', [
+            'page' => 'n/a',
+            'title' => 'Something unexpected happened!',
+            'content' => "<b style='color: lightcoral'>ERROR: {$message}</b>",
+        ])
     );
 });
 

@@ -13,7 +13,6 @@ $app = new FrameworkX\App(
     );
 
 // @TODO : Is docker running on middleware
-// @TODO : Basic Auth on middleware
 // @TODO : Add CSRF middleware
 
 $app->get('/', function () {

@@ -45,7 +45,7 @@ Disabling auth is _NOT RECOMMENDED!_ unless you are using some other kind of sec
 - [x] Stop a running container
 
 ## Notes/Cautions
-- 
+
 - Docker should be in running state in your server.
 - This app itself should not be running inside Docker container.
 

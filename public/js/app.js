@@ -28,12 +28,30 @@ document.addEventListener("DOMContentLoaded", (event) => {
         this.classList.toggle("menu-toggle--open");
     });
 
-    // var source = new EventSource("http://localhost:8081/logs");
-    // source.onmessage = function(event) {
-    //     console.log(event);
-    // };
-    // source.onerror = (err) => {
-    //     console.error("EventSource failed:", err);
-    // };
+    document.getElementById("follow-logs")?.addEventListener("click", function(event) {
+        event.preventDefault();
+        let container = this.dataset.containerId;
+
+        let watcher = new EventSource(BASE_URL + "/logs/watch/" + container);
+        let triggerBtn = this;
+        let stopper = document.getElementById("stop-logs");
+
+        stopper.style.display = 'inline-block';
+        triggerBtn.style.display = 'none';
+
+        watcher.addEventListener("message", function (evt)  {
+            console.log(evt.data);
+            // Add message to container
+        });
+
+        stopper.addEventListener("click", function(event) {
+            watcher.close();
+            this.style.display = 'none';
+            triggerBtn.style.display = 'inline-block';
+        });
+
+        watcher.onerror = (err) => console.error("EventSource failed:", err);
+        window.onbeforeunload = (evt) => watcher?.close();
+    });
 
 });

@@ -45,7 +45,15 @@ main, nav, footer {
     display: table;
 }
 
-.btn-action {
+.section-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn-action,
+.btn-header-action {
     color: lime;
     background-color: darkcyan;
     border-width: 0;
@@ -56,7 +64,8 @@ main, nav, footer {
     text-decoration: none;
 }
 
-.btn-action:hover {
+.btn-action:hover,
+.btn-header-action:hover {
     color: yellow;
     box-shadow: 2px 2px 0 yellowgreen;
     cursor: pointer;

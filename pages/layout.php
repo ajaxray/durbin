@@ -33,7 +33,14 @@
 </nav>
 
 <main>
-    <h2><?= $title ?></h2>
+    <div class="section-header">
+        <h2><?= $title ?></h2>
+
+        <?php if (isset($actions)): ?>
+            <div id="actions"><?= $actions ?></div>
+        <?php endif; ?>
+    </div>
+
     <div class="container">
 
         <form action="<?= $base_url ?>/action" method="post" id="action-form">
@@ -52,7 +59,9 @@
 <footer>
     <small><?= $copyright ?></small>
 </footer>
-
+<script type="text/javascript">
+    const BASE_URL = '<?= $base_url ?>';
+</script>
 <script type="text/javascript" src="<?= $base_url ?>/js/app.js"></script>
 </body>
 </html>

@@ -88,7 +88,7 @@ $app->get('/logs/{container-id}', function (Psr\Http\Message\ServerRequestInterf
     return React\Http\Message\Response::html(
         render('layout', [
             'page' => 'n/a',
-            'actions' => render('_watch_log_actions'),
+            // 'actions' => render('_watch_log_actions'),
             'title' => 'Latest logs from '. $containerId,
             'content' => htmlentities(trim($output)),
         ])
@@ -102,7 +102,6 @@ $app->get('/logs/watch/{container-id}', function () {
     $source = new React\Stream\ReadableResourceStream($handle, readChunkSize: -1);
     $dest = new React\Stream\ThroughStream();
 
-    ignore_user_abort(false);
     $source->on('data', function ($message) use ($dest) {
         $dest->write("data: $message\n\n");
 

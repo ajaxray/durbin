@@ -6,7 +6,7 @@ return [
     'name' => 'Docker Container Monitor',
     'title' => 'Docker Container Monitor',
     'copyright' => '© 2024 Your company name. All Rights Reserved.',
-    'base_url' => 'http://localhost:8081',
+    'base_url' => 'http://durbin.test',
     'base_dir' => realpath(__DIR__ .'/..'),
     'view_dir' => realpath(__DIR__ . '/../pages'),
 

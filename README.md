@@ -9,8 +9,12 @@ Tiny PHP script for monitoring Docker Containers running on a VPS/remote server.
 
 1. `git clone git@github.com:ajaxray/durbin.git`, 
 2. `composer install --prefer-dist`
-3. Check the `inc/config.php` to adjust your deployment environment.
-4. Now you can run it like any php app, including PHP development server.
+3. Copy the `inc/config.php`.
+```shell
+cp inc/config.php inc/config.local.php
+```
+Then adjust your deployment environment in `inc/config.local.php`.
+4. Now you can run it like *any php application* using nginx, apache, or even with PHP development server<sup>1</sup>.
 ```shell
 # Assuming you are in Durbin base directory
 cd public
@@ -39,13 +43,15 @@ Disabling auth is _NOT RECOMMENDED!_ unless you are using some other kind of sec
 - [x] Show container status (CPU/Memory uses etc.)
 - [x] Secure with Basic Auth
 - [x] Ability to install in subdirectory
-- [ ] Show latest logs of a container
+- [x] Show latest logs of a container
 - [ ] Show streaming logs of a container
 - [x] Start a stopped container
 - [x] Stop a running container
 
 ## Notes/Cautions
+1. PHP development server `php -S` is not suitable for showing streaming logs.
 
+### Additional things to remember
 - Docker should be in running state in your server.
 - This app itself should not be running inside Docker container.
 

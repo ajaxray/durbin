@@ -2,7 +2,7 @@
 
 Tiny PHP script for monitoring Docker Containers running on a VPS/remote server.
 
-<img src="https://github.com/ajaxray/durbin/assets/439612/8725dc33-c19c-4030-a25b-58ee0247f788" width="800" alt="Durbin Screenshot" />
+<img src="https://github.com/ajaxray/durbin/assets/439612/0c0e0bdb-8d97-4050-b5d6-2c4920c330b6"  alt="Durbin Screenshot" />
 
 
 ## Installation Steps
@@ -13,7 +13,8 @@ Tiny PHP script for monitoring Docker Containers running on a VPS/remote server.
 ```shell
 cp inc/config.php inc/config.local.php
 ```
-Then adjust your deployment environment in `inc/config.local.php`.
+Then adjust your deployment environment in `inc/config.local.php`.  
+
 4. Now you can run it like *any php application* using nginx, apache, or even with PHP development server<sup>1</sup>.
 ```shell
 # Assuming you are in Durbin base directory

@@ -19,8 +19,14 @@ function render(string $view, array $vars = []): string
     return trim(ob_get_clean());
 }
 
-
-
+function load_first(array $files)
+{
+    foreach ($files as $path) {
+        if (file_exists($path)) {
+            return include($path);
+        }
+    }
+}
 /**
  * Get string padded column output of shell command as an array
  *

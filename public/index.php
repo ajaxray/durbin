@@ -5,7 +5,10 @@ use Durbin\Processor\{AttachActions, AttachStatusIndicator};
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$config = include(__DIR__. '/../inc/config.php');
+$config = load_first([
+    __DIR__. '/../inc/config.local.php',
+    __DIR__. '/../inc/config.php',
+]);
 
 $app = new FrameworkX\App(
         FrameworkX\ErrorHandler::class,

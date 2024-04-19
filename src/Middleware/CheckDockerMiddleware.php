@@ -21,11 +21,7 @@ class CheckDockerMiddleware
 
     private function isDockerRunning(): bool
     {
-        ob_start();
-        system('curl -s --unix-socket /var/run/docker.sock http/_ping 2>&1 >/dev/null', $retval);
-        ob_end_clean();
-
-        return $retval === 0;
+        $output = shell_exec('docker info');
+        return (strpos($output, 'Containers:') !== false);
     }
-
 }

@@ -31,22 +31,32 @@ document.addEventListener("DOMContentLoaded", (event) => {
     document.getElementById("follow-logs")?.addEventListener("click", function(event) {
         event.preventDefault();
         let container = this.dataset.containerId;
+        console.log("WATCHING: "+ container);
 
         let watcher = new EventSource(BASE_URL + "/logs/watch/" + container);
         let triggerBtn = this;
-        let stopper = document.getElementById("stop-logs");
+        let stopperBtn = document.getElementById("stop-logs");
+        let clearBtn = document.getElementById("clear-logs");
+        let screen = document.getElementById("screen");
 
-        stopper.style.display = 'inline-block';
+        stopperBtn.style.display = 'inline-block';
+        clearBtn.style.display = 'inline-block';
         triggerBtn.style.display = 'none';
+        screen.innerHTML = '';
 
         watcher.addEventListener("message", function (evt)  {
             console.log(evt.data);
-            // Add message to container
+            screen.innerHTML += '<div>'+ evt.data +'</div>';
         });
 
-        stopper.addEventListener("click", function(event) {
+        clearBtn.addEventListener("click", function(event) {
+            screen.innerHTML = '';
+        });
+
+        stopperBtn.addEventListener("click", function(event) {
             watcher.close();
             this.style.display = 'none';
+            clearBtn.style.display = 'none';
             triggerBtn.style.display = 'inline-block';
         });
 

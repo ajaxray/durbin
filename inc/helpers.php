@@ -19,10 +19,14 @@ function render(string $view, array $vars = []): string
     return trim(ob_get_clean());
 }
 
-function load_first(array $files)
+function load_first_available(array $files)
 {
     foreach ($files as $path) {
         if (file_exists($path)) {
+            if (!is_readable($path)) {
+                throw new \Exception("Config file $path found but not readable!");
+            }
+
             return include($path);
         }
     }
